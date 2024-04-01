@@ -15,8 +15,4 @@
     <ProjectReference Include="..\MultiShop.Repository\MultiShop.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mapping\" />
-  </ItemGroup>
-
 </Project>

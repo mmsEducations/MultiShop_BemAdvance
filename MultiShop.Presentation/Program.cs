@@ -14,6 +14,10 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 //Repository ntegrasyonu 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
+builder.Services.AddScoped<ISliderService, SliderService>();
+builder.Services.AddScoped<ISliderRepository, SliderRepository>();
+
+
 
 //4:for connection db 
 //bunun set edildiði yer MultiShopDbContext içerisindeki constructor metottur.
@@ -21,6 +25,12 @@ builder.Services.AddDbContext<MultiShopDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MultiShopConnectionStr_Prod"));
 });
+
+
+//Step2 : AutoMapper
+builder.Services.AddAutoMapper(typeof(CategoryMappingProfile));
+builder.Services.AddAutoMapper(typeof(SliderMappingProfile));
+
 
 var app = builder.Build();
 

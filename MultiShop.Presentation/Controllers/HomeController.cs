@@ -6,10 +6,13 @@ namespace MultiShop.Presentation.Controllers
     public class HomeController : Controller
     {
         private readonly ICategoryService _categoryService;
+        private readonly ISliderService _sliderService;
 
-        public HomeController(ICategoryService categoryService)
+        public HomeController(ICategoryService categoryService,
+                               ISliderService sliderService)
         {
             _categoryService = categoryService;
+            _sliderService = sliderService;
         }
 
         public IActionResult Index()
@@ -19,6 +22,8 @@ namespace MultiShop.Presentation.Controllers
 
             //select * from Where //Sorgulanabilir 
             var categores = _categoryService.GetCategories().AsQueryable().Where(predicate[0]);
+
+            var sliders = _sliderService.GetSliders();
 
             //selecte * from where ? 
 

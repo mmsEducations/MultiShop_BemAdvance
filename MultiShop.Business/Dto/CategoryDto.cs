@@ -9,5 +9,7 @@
         public int? Order { get; set; }
 
         public string CatIdAndName { get; set; }
+
+        public string ParentCategoryIdAndName { get; set; }
     }
 }
