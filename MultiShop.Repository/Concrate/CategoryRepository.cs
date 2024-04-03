@@ -2,9 +2,9 @@
 
 namespace MultiShop.Repository
 {
-    public class CategoryRepository : MultiShop.Repository.Repository<Category>, ICategoryRepository
+    public class ProductsRepository : MultiShop.Repository.Repository<Category>, ICategoryRepository
     {
-        public CategoryRepository(MultiShopDbContext dbContext) : base(dbContext)
+        public ProductsRepository(MultiShopDbContext dbContext) : base(dbContext)
         {
 
         }

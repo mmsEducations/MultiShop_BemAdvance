@@ -11,4 +11,7 @@ namespace MultiShop.Data
         public int? Order { get; set; }
     }
 
+
+
+
 }

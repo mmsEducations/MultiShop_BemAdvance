@@ -12,11 +12,15 @@ builder.Services.AddControllersWithViews(); //1) Controller views alt yapýsýný e
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 //Repository ntegrasyonu 
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryRepository, ProductsRepository>();
 
 builder.Services.AddScoped<ISliderService, SliderService>();
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
 
+#region product
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+#endregion
 
 
 //4:for connection db 
