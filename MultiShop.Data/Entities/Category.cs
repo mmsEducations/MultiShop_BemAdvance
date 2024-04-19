@@ -1,6 +1,4 @@
-﻿using MultiShop.Data.Interfaces;
-
-namespace MultiShop.Data
+﻿namespace MultiShop.Data
 {
     public class Category : BaseEntity, IOrdered
     {

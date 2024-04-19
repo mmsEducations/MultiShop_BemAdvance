@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MultiShop.Data;
-using System.Linq.Expressions;
-
+﻿
 namespace MultiShop.Repository
 {
     //Repository<TEntity> Generic bir class

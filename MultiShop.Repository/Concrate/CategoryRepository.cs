@@ -1,5 +1,4 @@
-﻿using MultiShop.Data;
-
+﻿
 namespace MultiShop.Repository
 {
     public class ProductsRepository : MultiShop.Repository.Repository<Category>, ICategoryRepository

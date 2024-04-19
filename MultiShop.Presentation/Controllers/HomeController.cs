@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MultiShop.Business;
-using System.Diagnostics.CodeAnalysis;
-
-namespace MultiShop.Presentation.Controllers
+﻿namespace MultiShop.Presentation.Controllers
 {
     //Primary Constructor 
     public class HomeController(ICategoryService categoryService,

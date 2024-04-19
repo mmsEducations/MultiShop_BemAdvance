@@ -1,5 +1,4 @@
-﻿using MultiShop.Data;
-
+﻿
 namespace MultiShop.Repository
 {
     //ICategoryRepository   : Sadece Category Özel metodlar için kullanılır 

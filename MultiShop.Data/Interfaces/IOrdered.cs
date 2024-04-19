@@ -1,4 +1,4 @@
-﻿namespace MultiShop.Data.Interfaces
+﻿namespace MultiShop.Data
 {
     public interface IOrdered
     {

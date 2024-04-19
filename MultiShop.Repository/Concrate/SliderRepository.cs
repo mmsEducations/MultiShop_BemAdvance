@@ -1,5 +1,4 @@
-﻿using MultiShop.Data;
-
+﻿
 namespace MultiShop.Repository
 {
     public class SliderRepository : MultiShop.Repository.Repository<Slider>, ISliderRepository

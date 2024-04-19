@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-
+﻿
 namespace MultiShop.Repository
 {
     //Tüm enitityler için ortak olan metodların imzalarını barındırır 

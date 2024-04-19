@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using MultiShop.Data;
-using MultiShop.Repository;
-
+﻿
 namespace MultiShop.Business
 {
     public class SliderService(ISliderRepository sliderRepository, IMapper mapper) : ISliderService

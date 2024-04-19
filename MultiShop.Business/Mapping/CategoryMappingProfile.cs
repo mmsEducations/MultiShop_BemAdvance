@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MultiShop.Data;
+﻿
 
 namespace MultiShop.Business
 {
