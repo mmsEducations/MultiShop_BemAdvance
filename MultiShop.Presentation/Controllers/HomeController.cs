@@ -1,22 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.Business;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MultiShop.Presentation.Controllers
 {
-    public class HomeController : Controller
-    {
-        private readonly ICategoryService _categoryService;
-        private readonly ISliderService _sliderService;
-        private readonly IProductService _productService;
-
-        public HomeController(ICategoryService categoryService,
+    //Primary Constructor 
+    public class HomeController(ICategoryService categoryService,
                                ISliderService sliderService,
-                              IProductService productService)
-        {
-            _categoryService = categoryService;
-            _sliderService = sliderService;
-            _productService = productService;
-        }
+                              IProductService productService) : Controller
+    {
+        private readonly ICategoryService _categoryService = categoryService;
+        private readonly ISliderService _sliderService = sliderService;
+        private readonly IProductService _productService = productService;
+
 
         public IActionResult Index()
         {
@@ -28,8 +24,15 @@ namespace MultiShop.Presentation.Controllers
 
             var sliders = _sliderService.GetSliders();
 
-
             var products = _productService.GetProducts();
+
+            /*
+            List<int> numbersbefor12 = new List<int>();
+            List<int> numbers2before12 = new();
+            List<int> numbersWith12 = [];
+            */
+
+
 
             //selecte * from where ? 
 
@@ -53,6 +56,21 @@ namespace MultiShop.Presentation.Controllers
 
             //var sliders = Context.Sliders.ToList();
             return View();
+        }
+
+        [Experimental("thisLineWillbeCheck")]
+        public void DeleteAllUsers()
+        {
+            //Raw String 
+            var favoriteNumber = 5;
+
+            var query = $"""
+                 select $* 
+                 from Product
+                 where price>{favoriteNumber}
+                 order by price asc
+                """;
+
         }
 
     }

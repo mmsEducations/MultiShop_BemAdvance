@@ -4,17 +4,11 @@ using MultiShop.Repository;
 
 namespace MultiShop.Business
 {
-    public class CategoryService : ICategoryService
+    public class CategoryService(ICategoryRepository categoryRepository, IMapper mapper) : ICategoryService
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryRepository _categoryRepository = categoryRepository;
         //Step3
-        private readonly IMapper _mapper;
-        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
-        {
-            _categoryRepository = categoryRepository;
-            _mapper = mapper;
-
-        }
+        private readonly IMapper _mapper = mapper;
 
         public List<CategoryDto> GetCategories()
         {
