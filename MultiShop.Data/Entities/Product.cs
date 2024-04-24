@@ -1,6 +1,6 @@
 ﻿namespace MultiShop.Data
 {
-    public class Product : BaseEntity, IOrdered
+    public class Product : BaseEntity, IOrdered, IImage
     {
         public int ProductID { get; set; }
         public required string ProductName { get; set; }
@@ -9,6 +9,7 @@
         public decimal DistcountedPrice { get; set; }
         public short? StockQuantity { get; set; }
         public int? Order { get; set; }
+        public string? Image { get; set; }
 
     }
 }

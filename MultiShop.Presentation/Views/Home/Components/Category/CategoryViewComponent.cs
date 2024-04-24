@@ -7,7 +7,7 @@ namespace MultiShop.Presentation.Views
 
         public IViewComponentResult Invoke()
         {
-            List<CategoryDto> categories = _categoryService.GetCategories();
+            List<CategoryDto> categories = _categoryService.GetCategoriesWithProductCount();
             return View(categories);
         }
     }

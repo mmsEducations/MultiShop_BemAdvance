@@ -1,5 +1,4 @@
-﻿
-namespace MultiShop.Business
+﻿namespace MultiShop.Business
 {
     public class ProductService(IProductRepository productRepository, IMapper mapper) : IProductService
     {
@@ -9,11 +8,13 @@ namespace MultiShop.Business
 
         public List<ProductDto> GetProducts()
         {
-            List<Product> categories = _productRepository.GetAll();
-            List<ProductDto> categoriDtos = _mapper.Map<List<ProductDto>>(categories);
+            List<Product> products = _productRepository.GetAll();
+            List<ProductDto> categoriDtos = _mapper.Map<List<ProductDto>>(products);
             return categoriDtos;
 
         }
+
+
     }
 }
 

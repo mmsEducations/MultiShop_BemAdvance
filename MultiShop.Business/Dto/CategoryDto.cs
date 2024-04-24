@@ -11,5 +11,8 @@
         public string CatIdAndName { get; set; }
 
         public string ParentCategoryIdAndName { get; set; }
+
+        public int ProductCount { get; set; }
+
     }
 }

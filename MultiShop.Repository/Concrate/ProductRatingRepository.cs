@@ -1,13 +1,14 @@
 ﻿
 namespace MultiShop.Repository
 {
-    public class ProductRepository : MultiShop.Repository.Repository<Product>, IProductRepository
+    public class ProductRatingRepository : MultiShop.Repository.Repository<ProductRating>, IProductRatingRepository
     {
-        public ProductRepository(MultiShopDbContext dbContext) : base(dbContext)
+        public ProductRatingRepository(MultiShopDbContext dbContext) : base(dbContext)
         {
 
         }
     }
+
 
 }
 

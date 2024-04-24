@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using MultiShop.Business;
+using MultiShop.Business.Interfaces;
 using MultiShop.Data;
 using MultiShop.Repository;
 
@@ -20,6 +20,11 @@ builder.Services.AddScoped<ISliderRepository, SliderRepository>();
 #region product
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+#endregion
+
+#region product
+builder.Services.AddScoped<IProductRatingService, ProductRatingService>();
+builder.Services.AddScoped<IProductRatingRepository, ProductRatingRepository>();
 #endregion
 
 

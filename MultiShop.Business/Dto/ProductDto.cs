@@ -9,6 +9,9 @@
         public decimal DistcountedPrice { get; set; }
         public short? StockQuantity { get; set; }
         public int? Order { get; set; }
+        public string? Image { get; set; }
+        public int? ProductRating { get; set; }
 
     }
+
 }
