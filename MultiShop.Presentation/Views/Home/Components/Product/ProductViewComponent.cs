@@ -8,9 +8,9 @@ namespace MultiShop.Presentation.Views
     {
         private readonly IProductRatingService _productService = productRatingService;
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(ProductHeaderType ProductHeaderType)
         {
-            List<ProductDto> products = _productService.GetProductWithRatings();
+            List<ProductDto> products = _productService.GetProductWithRatings(ProductHeaderType);
             return View(products);
         }
     }

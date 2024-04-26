@@ -2,6 +2,6 @@
 {
     public interface ISliderService
     {
-        List<SliderDto> GetSliders();
+        List<SliderDto> GetSliders(SliderPosition sliderPosition);
     }
 }

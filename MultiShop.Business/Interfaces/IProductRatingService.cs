@@ -2,6 +2,6 @@
 {
     public interface IProductRatingService
     {
-        List<ProductDto> GetProductWithRatings();
+        List<ProductDto> GetProductWithRatings(ProductHeaderType productHeaderType);
     }
 }
