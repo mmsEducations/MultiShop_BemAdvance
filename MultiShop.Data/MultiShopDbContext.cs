@@ -15,6 +15,7 @@ namespace MultiShop.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Slider> Sliders { get; set; } //Database objesine karşılık gelir 
         public DbSet<ProductRating> ProductRatings { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
     }
 }

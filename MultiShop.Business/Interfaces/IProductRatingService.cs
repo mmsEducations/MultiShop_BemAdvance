@@ -4,4 +4,5 @@
     {
         List<ProductDto> GetProductWithRatings(ProductHeaderType productHeaderType);
     }
+
 }

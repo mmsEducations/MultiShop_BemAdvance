@@ -22,9 +22,14 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 #endregion
 
-#region product
+#region productRating
 builder.Services.AddScoped<IProductRatingService, ProductRatingService>();
 builder.Services.AddScoped<IProductRatingRepository, ProductRatingRepository>();
+#endregion
+
+#region productImage
+builder.Services.AddScoped<IProductImageService, ProductImageService>();
+builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
 #endregion
 
 
