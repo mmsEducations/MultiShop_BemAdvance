@@ -7,6 +7,8 @@
         public required string CategoryName { get; set; }
         public string? Image { get; set; }
         public int? Order { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
+
     }
 
 }

@@ -11,9 +11,10 @@
         public int? Order { get; set; }
         public string? Image { get; set; }
         public int? ProductRating { get; set; }
-        public List<ProductRating> ProductRatings { get; set; }
         public string? Description { get; set; }
-        public List<ProductImage> ProductImages { get; set; }
+        public Category Category { get; set; }
+        public virtual ICollection<ProductRating> ProductRatings { get; set; }
+        public virtual ICollection<ProductImage> ProductImages { get; set; }
     }
 
 }
