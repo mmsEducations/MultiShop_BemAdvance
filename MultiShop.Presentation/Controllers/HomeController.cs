@@ -12,6 +12,10 @@
 
         public IActionResult Index()
         {
+            var product = _productService.GetProductById(1);
+            var products = _productService.GetProducts();
+
+
             var predicate = new List<Func<CategoryDto, bool>>();
             predicate.Add(c => c.CategoryId == 1);
 
@@ -20,53 +24,8 @@
 
             //var sliders = _sliderService.GetSliders();
 
-            var products = _productService.GetProducts();
 
-            /*
-            List<int> numbersbefor12 = new List<int>();
-            List<int> numbers2before12 = new();
-            List<int> numbersWith12 = [];
-            */
-
-
-
-            //selecte * from where ? 
-
-            //int CategoryId = 100; int ParentCategoryId = 100;
-            //var predicate = new List<Expression<Func<Slider, bool>>>();
-
-            //if (CategoryId != null)
-            //{
-            //    predicate.Add(x => x.Content != null);
-
-            //}
-
-            //if (ParentCategoryId != null)
-            //{
-            //    predicate.Add(x => x.ParentCategoryId != null);
-
-            //}
-
-
-            //var categories = Context.Categories.Where(x => x.IsActive == true);
-
-            //var sliders = Context.Sliders.ToList();
             return View();
-        }
-
-        [Experimental("thisLineWillbeCheck")]
-        public void DeleteAllUsers()
-        {
-            //Raw String 
-            var favoriteNumber = 5;
-
-            var query = $"""
-                 select $* 
-                 from Product
-                 where price>{favoriteNumber}
-                 order by price asc
-                """;
-
         }
 
     }

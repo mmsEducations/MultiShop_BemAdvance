@@ -14,5 +14,8 @@
 
         public int ProductCount { get; set; }
 
+        public ICollection<Product> Products { get; set; }
+
+
     }
 }

@@ -20,12 +20,7 @@
         public List<CategoryDto> GetCategoriesWithProductCount()
         {
             List<CategoryDto> categoriDtos = _mapper.Map<List<CategoryDto>>(_categoryRepository.GetAll());
-            List<Product> products = _productRepository.GetAll();
 
-            foreach (CategoryDto CategoryDto in categoriDtos)
-            {
-                CategoryDto.ProductCount = products.Where(p => p.CategoryID == CategoryDto.CategoryId).Count();
-            }
             return categoriDtos;
 
         }

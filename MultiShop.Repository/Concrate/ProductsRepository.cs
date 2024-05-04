@@ -7,6 +7,16 @@ namespace MultiShop.Repository
         {
 
         }
+
+        public Product GetProductById(int id)
+        {
+            return _dbContext.Set<Product>()
+                              .Include(pc => pc.Category)
+                              .Include(pr => pr.ProductRatings)
+                              .Include(pr => pr.ProductImages)
+                              .Where(p => p.ProductID == id)
+                              .FirstOrDefault();
+        }
     }
 
 }

@@ -8,6 +8,7 @@
         public string? Review { get; set; }
         public string? Email { get; set; }
         public DateTime? RateOrReviewDate { get; set; }
+        public Product Product { get; set; }
 
     }
 }

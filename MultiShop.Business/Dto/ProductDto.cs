@@ -4,7 +4,7 @@
     {
         public int ProductID { get; set; }
         public required string ProductName { get; set; }
-        public int? CategoryID { get; set; }
+        public int CategoryID { get; set; }
         public decimal? Price { get; set; }
         public decimal DistcountedPrice { get; set; }
         public short? StockQuantity { get; set; }
@@ -14,6 +14,7 @@
         public List<ProductRating> ProductRatings { get; set; }
         public string? Description { get; set; }
         public List<ProductImage> ProductImages { get; set; }
+        public Category Category { get; set; }//Navigation property
     }
 
 }

@@ -5,6 +5,7 @@ namespace MultiShop.Repository
     //IRepository<Category> : Diğer base metodlara erişim için kullanılır
     public interface IProductRepository : IRepository<Product>
     {
+        Product GetProductById(int id);
     }
 
 

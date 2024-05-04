@@ -13,13 +13,9 @@
 
         public ProductDto GetProductById(int id)
         {
-            Product product = _productRepository.Get(id);
-            List<ProductRating> productRatings = _productRatingRepository.GetAll().Where(pr => pr.ProductId == product.ProductID).ToList();
+            Product product = _productRepository.GetProductById(id);
             ProductDto productDto = _mapper.Map<ProductDto>(product);
-
-            productDto.ProductRating = (product != null) ? Convert.ToInt32(productRatings.Average(p => p.Rating)) : 0;
-            productDto.ProductRatings = productRatings;
-            productDto.ProductImages = _productImageRepository.GetAll().Where(pImage => pImage.ProductId == id).ToList();
+            productDto.ProductRating = (product != null) ? Convert.ToInt32(product.ProductRatings.Average(p => p.Rating)) : 0;
 
             return productDto;
         }
