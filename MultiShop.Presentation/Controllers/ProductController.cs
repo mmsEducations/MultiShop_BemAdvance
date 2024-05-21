@@ -11,12 +11,16 @@
         public IActionResult Index(int id)
         {
             var prodcutDto = _productService.GetProductById(id);
+            var prodcutDtos = _productService.GetSimilarProducts(id);
 
-            return View(prodcutDto);
+            ProductMultipleResultDto productResultDto = new ProductMultipleResultDto()
+            {
+                DtoTye = prodcutDto,
+                ProductDtos = prodcutDtos
+            };
+
+            return View(productResultDto);
         }
-
-
-
 
     }
 }

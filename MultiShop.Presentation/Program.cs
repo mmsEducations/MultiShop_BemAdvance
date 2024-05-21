@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);//web uygulamasý oluþturulur
 
 builder.Services.AddControllersWithViews(); //1) Controller views alt yapýsýný entegre ediyoruz
 
+
 //Servis Entegrasyonu
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
@@ -51,7 +52,7 @@ var app = builder.Build();
 
 app.UseRouting(); //2
 
-app.MapControllerRoute(name: "default", pattern: "{Controller=Home}/{action=Index}/{id?}");//2
+app.MapControllerRoute(name: "default", pattern: "{Controller=User}/{action=SignIn}/{id?}");//2
 
 app.UseStaticFiles();//3
 

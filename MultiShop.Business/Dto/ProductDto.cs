@@ -17,4 +17,11 @@
         public Category Category { get; set; }//Navigation property
     }
 
+
+
+    public class ProductMultipleResultDto : BaseDto<ProductDto>
+    {
+        public List<ProductDto> ProductDtos { get; set; }
+    }
+
 }

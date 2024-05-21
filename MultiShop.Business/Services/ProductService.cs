@@ -23,12 +23,20 @@
         public List<ProductDto> GetProducts()
         {
             List<Product> products = _productRepository.GetAll();
-            List<ProductDto> categoriDtos = _mapper.Map<List<ProductDto>>(products);
-            return categoriDtos;
+            List<ProductDto> productsDtos = _mapper.Map<List<ProductDto>>(products);
+            return productsDtos;
 
         }
 
-
+        public List<ProductDto> GetSimilarProducts(int id)
+        {
+            var catId = _productRepository.GetProductById(id).Category.CategoryId;
+            List<Product> products = _productRepository.GetAll(p => p.CategoryID == catId)
+                                                       .Take(10)
+                                                       .ToList();
+            List<ProductDto> productsDtos = _mapper.Map<List<ProductDto>>(products);
+            return productsDtos;
+        }
     }
 }
 

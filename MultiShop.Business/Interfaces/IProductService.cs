@@ -4,5 +4,8 @@
     {
         List<ProductDto> GetProducts();
         ProductDto GetProductById(int id);
+
+        List<ProductDto> GetSimilarProducts(int id);
+
     }
 }
