@@ -15,7 +15,7 @@
         {
             Product product = _productRepository.GetProductById(id);
             ProductDto productDto = _mapper.Map<ProductDto>(product);
-            productDto.ProductRating = (product != null) ? Convert.ToInt32(product.ProductRatings.Average(p => p.Rating)) : 0;
+            //productDto.ProductRating = (product != null) ? Convert.ToInt32(product.ProductRatings.Average(p => p.Rating)) : 0;
 
             return productDto;
         }

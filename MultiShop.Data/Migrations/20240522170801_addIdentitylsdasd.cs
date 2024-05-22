@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MultiShop.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIdentityTable : Migration
+    public partial class addIdentitylsdasd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
