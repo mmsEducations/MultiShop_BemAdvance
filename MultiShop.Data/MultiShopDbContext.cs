@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace MultiShop.Data
 {
-    public class MultiShopDbContext : DbContext
+    public class MultiShopDbContext : IdentityDbContext<ApplicationUser>
     {
 
         //new DbContextOptions<DbContext>()

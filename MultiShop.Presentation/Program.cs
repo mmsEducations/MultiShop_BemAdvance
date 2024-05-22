@@ -6,6 +6,7 @@ using MultiShop.Repository;
 var builder = WebApplication.CreateBuilder(args);//web uygulamasý oluþturulur 
 
 
+
 builder.Services.AddControllersWithViews(); //1) Controller views alt yapýsýný entegre ediyoruz
 
 
@@ -40,7 +41,8 @@ builder.Services.AddDbContext<MultiShopDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MultiShopConnectionStr_Prod"));
 });
-
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<MultiShopDbContext>();
 
 //Step2 : AutoMapper
 builder.Services.AddAutoMapper(typeof(CategoryMappingProfile));
@@ -52,7 +54,7 @@ var app = builder.Build();
 
 app.UseRouting(); //2
 
-app.MapControllerRoute(name: "default", pattern: "{Controller=User}/{action=SignIn}/{id?}");//2
+app.MapControllerRoute(name: "default", pattern: "{Controller=Home}/{action=index}/{id?}");//2
 
 app.UseStaticFiles();//3
 
