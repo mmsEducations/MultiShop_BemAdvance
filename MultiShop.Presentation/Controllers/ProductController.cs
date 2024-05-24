@@ -10,6 +10,10 @@
 
         public IActionResult Index(int id)
         {
+
+            var sessionValue = HttpContext.Session.GetString("userName");
+            var sessionCartData = HttpContext.Session.GetObject<Cart>("cart");
+
             var prodcutDto = _productService.GetProductById(id);
             var prodcutDtos = _productService.GetSimilarProducts(id);
 

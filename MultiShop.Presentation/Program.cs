@@ -46,20 +46,19 @@ builder.Services.AddDbContext<MultiShopDbContext>(options =>
 builder.Services.AddAutoMapper(typeof(CategoryMappingProfile));
 builder.Services.AddAutoMapper(typeof(SliderMappingProfile));
 
+builder.Services.AddSession();//Session kullanmak için eklenmelidir
 
 var app = builder.Build();
 
-
 app.UseRouting(); //2
 
-app.MapControllerRoute(name: "default", pattern: "{Controller=User}/{action=SignIn}/{id?}");//2
+app.MapControllerRoute(name: "default", pattern: "{Controller=Home}/{action=Index}/{id?}");//2
 
 app.UseStaticFiles();//3
 
 //UserController/Index -> User/Index/id
 //? optional
 
-
-
+app.UseSession();
 
 app.Run();
