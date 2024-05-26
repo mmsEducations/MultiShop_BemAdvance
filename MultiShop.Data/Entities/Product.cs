@@ -2,7 +2,7 @@
 {
     public class Product : BaseEntity, IOrdered, IImage
     {
-        public int ProductID { get; set; }
+        public int? ProductID { get; set; }
         public required string ProductName { get; set; }
         public decimal? Price { get; set; }
         public decimal DistcountedPrice { get; set; }

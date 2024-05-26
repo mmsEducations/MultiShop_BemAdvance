@@ -2,7 +2,7 @@
 {
     public class Slider : BaseEntity, IOrdered
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public required string Header { get; set; }
         public required string Content { get; set; }
         public required string Image { get; set; }

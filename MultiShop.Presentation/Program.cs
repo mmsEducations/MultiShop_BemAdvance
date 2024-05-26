@@ -62,61 +62,60 @@ app.UseStaticFiles();//3
 //UserController/Index -> User/Index/id
 //? optional
 
+#region add dumy data
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<MultiShopDbContext>();
     //var deneme=context.Products.ToList();
-   if(!context.Categories.Any())
+    if (!context.Categories.Any() || !context.Sliders.Any())
     {
         // IWebHostEnvironment servisini al
         var env = services.GetRequiredService<IWebHostEnvironment>();
-
-
-
-        string pathproducts = Path.Combine(env.WebRootPath, @"DumyData\products.json");//dosya yolunu alýr
-        string products = File.ReadAllText(pathproducts);//dosyayý verisini string deðiþkene atar
-
-        string pathcategories = Path.Combine(env.WebRootPath, @"DumyData\categories.json");
-        string categories = File.ReadAllText(pathcategories);
-
-        string pathproductRatings = Path.Combine(env.WebRootPath, @"DumyData\productRatings.json");
-        string productRatings = File.ReadAllText(pathproductRatings);
-
-        string pathproductImages = Path.Combine(env.WebRootPath, @"DumyData\productImages.json");
-        string productImages = File.ReadAllText(pathproductImages);
-
+        string pathcategories = Path.Combine(env.WebRootPath, @"DumyData\categorieswithinclude.json");//dosya yolunu alýr
+        string categories = File.ReadAllText(pathcategories);//dosyayý verisini string deðiþkene atar
         string pathSliders = Path.Combine(env.WebRootPath, @"DumyData\sliders.json");
         string sliders = File.ReadAllText(pathSliders);
-
-
         //json verilerini objelere dönüþtürür
-        var productObject = JsonConvert.DeserializeObject<List<Product>>(products);
         var categoriesObject = JsonConvert.DeserializeObject<List<Category>>(categories);
-        
-        var productRatingsObject = JsonConvert.DeserializeObject<List<ProductRating>>(productRatings);
-        var productImagesObject = JsonConvert.DeserializeObject<List<ProductImage>>(productImages);
-        var slidersObject = JsonConvert.DeserializeObject<List<Slider>>(sliders);
-        if (productObject != null && categoriesObject != null && productRatingsObject != null && productImagesObject != null && slidersObject != null)
+        if (categoriesObject != null)
         {
-            //foreach (var item in categoriesObject)
-            //{
-            //    item.CategoryId = null;
-            //}
+            foreach (var category in categoriesObject)
+            {
+                category.CategoryId = null;
+                foreach (var product in category.Products)
+                {
+                    product.ProductID = null;
+                    foreach (var productimage in product.ProductImages)
+                    {
+                        productimage.ProductImageId = null;
+                    }
+                    foreach (var productRating in product.ProductRatings)
+                    {
+                        productRating.ProductRatingId = null;
+                    }
+                }
+            }
             context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Categories ON");
             context.AddRange(categoriesObject);
-
+            context.SaveChanges();
+            context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Categories OFF");
+        }
+        var slidersObject = JsonConvert.DeserializeObject<List<Slider>>(sliders);
+        if (slidersObject != null)
+        {
+            foreach (var item in slidersObject)
+            {
+                item.Id = null;
+            }
+            context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Categories ON");
+            context.AddRange(slidersObject);
             context.SaveChanges();
             context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Categories OFF");
         }
     }
-
-
-   
-
-
 }
-
+#endregion
 
 
 app.Run();
