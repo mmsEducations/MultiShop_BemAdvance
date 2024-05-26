@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MultiShop.Business.Interfaces;
 using MultiShop.Data;
 using MultiShop.Repository;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);//web uygulamasý oluþturulur 
 
@@ -61,6 +62,60 @@ app.UseStaticFiles();//3
 //UserController/Index -> User/Index/id
 //? optional
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<MultiShopDbContext>();
+    //var deneme=context.Products.ToList();
+   if(!context.Categories.Any())
+    {
+        // IWebHostEnvironment servisini al
+        var env = services.GetRequiredService<IWebHostEnvironment>();
+
+
+
+        string pathproducts = Path.Combine(env.WebRootPath, @"DumyData\products.json");//dosya yolunu alýr
+        string products = File.ReadAllText(pathproducts);//dosyayý verisini string deðiþkene atar
+
+        string pathcategories = Path.Combine(env.WebRootPath, @"DumyData\categories.json");
+        string categories = File.ReadAllText(pathcategories);
+
+        string pathproductRatings = Path.Combine(env.WebRootPath, @"DumyData\productRatings.json");
+        string productRatings = File.ReadAllText(pathproductRatings);
+
+        string pathproductImages = Path.Combine(env.WebRootPath, @"DumyData\productImages.json");
+        string productImages = File.ReadAllText(pathproductImages);
+
+        string pathSliders = Path.Combine(env.WebRootPath, @"DumyData\sliders.json");
+        string sliders = File.ReadAllText(pathSliders);
+
+
+        //json verilerini objelere dönüþtürür
+        var productObject = JsonConvert.DeserializeObject<List<Product>>(products);
+        var categoriesObject = JsonConvert.DeserializeObject<List<Category>>(categories);
+        
+        var productRatingsObject = JsonConvert.DeserializeObject<List<ProductRating>>(productRatings);
+        var productImagesObject = JsonConvert.DeserializeObject<List<ProductImage>>(productImages);
+        var slidersObject = JsonConvert.DeserializeObject<List<Slider>>(sliders);
+        if (productObject != null && categoriesObject != null && productRatingsObject != null && productImagesObject != null && slidersObject != null)
+        {
+            //foreach (var item in categoriesObject)
+            //{
+            //    item.CategoryId = null;
+            //}
+            context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Categories ON");
+            context.AddRange(categoriesObject);
+
+            context.SaveChanges();
+            context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT Categories OFF");
+        }
+    }
+
+
+   
+
+
+}
 
 
 
