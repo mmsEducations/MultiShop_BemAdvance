@@ -12,10 +12,10 @@
 
         public IActionResult Index()
         {
-            HttpContext.Session.SetString("userName", "Bektaş");
+            //HttpContext.Session.SetString("userName", "Bektaş");
 
-            var cart = new Cart { Id = 1, Name = "Cart1" };
-            HttpContext.Session.SetObject("cart", cart);
+            //var cart = new Cart { Id = 1, Name = "Cart1" };
+            //HttpContext.Session.SetObject("cart", cart);
 
             //Session ile Cookie arasındaki fark : Session Server side,Cookie client side tutar 
 
