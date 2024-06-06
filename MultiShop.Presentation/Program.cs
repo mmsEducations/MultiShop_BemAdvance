@@ -5,7 +5,6 @@ using MultiShop.Repository;
 
 var builder = WebApplication.CreateBuilder(args);//web uygulamasý oluþturulur 
 
-
 builder.Services.AddControllersWithViews(); //1) Controller views alt yapýsýný entegre ediyoruz
 
 
@@ -34,6 +33,18 @@ builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
 #endregion
 
 
+#region customer
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+#endregion
+
+#region order-orderdetail
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+#endregion
+
+
 //4:for connection db 
 //bunun set edildiði yer MultiShopDbContext içerisindeki constructor metottur.
 builder.Services.AddDbContext<MultiShopDbContext>(options =>
@@ -43,8 +54,13 @@ builder.Services.AddDbContext<MultiShopDbContext>(options =>
 
 
 //Step2 : AutoMapper
+
+builder.Services.AddAutoMapper(typeof(ProductMappingProfile));
 builder.Services.AddAutoMapper(typeof(CategoryMappingProfile));
 builder.Services.AddAutoMapper(typeof(SliderMappingProfile));
+builder.Services.AddAutoMapper(typeof(CustomerMappingProfile));
+builder.Services.AddAutoMapper(typeof(OrderMappingProfile));
+builder.Services.AddAutoMapper(typeof(OrderDetailMappingProfile));
 
 builder.Services.AddSession();//Session kullanmak için eklenmelidir
 

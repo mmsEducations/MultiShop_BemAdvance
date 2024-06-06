@@ -17,5 +17,16 @@ namespace MultiShop.Data
         public DbSet<ProductRating> ProductRatings { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
 
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrderDetail>()
+                .HasKey(od => new { od.OrderID, od.ProductID });
+        }
     }
+
+
 }

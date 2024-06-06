@@ -8,6 +8,15 @@
         public int Quantity { get; set; }
         public int Total { get; set; }
 
+
+        public decimal ProductQuantityPrice
+        {
+            get
+            {
+                return DistcountedPrice * Quantity;
+            }
+        }
+
     }
 
 
