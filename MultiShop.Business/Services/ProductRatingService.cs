@@ -13,7 +13,6 @@ namespace MultiShop.Business
         private readonly IProductRepository _productRepository = productRepository;
         private readonly IMapper _mapper = mapper;
 
-
         public List<ProductDto> GetProductWithRatings(ProductHeaderType productHeaderType)
         {
             List<ProductRating> productRatings = _productRatingRepository.GetAll();

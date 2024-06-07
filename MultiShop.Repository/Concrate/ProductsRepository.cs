@@ -17,6 +17,25 @@ namespace MultiShop.Repository
                               .Where(p => p.ProductID == id)
                               .FirstOrDefault();
         }
+
+
+        public List<Product> GetProductsByCategoriId(int id)
+        {
+            return _dbContext.Set<Product>()
+                              .Include(pc => pc.Category)
+                              .Where(p => p.CategoryID == id)
+                              .ToList();
+        }
+
+        public List<Product> GetProductsByFilter(int minPrice, int maxPrice, int sorting)
+        {
+            return _dbContext.Set<Product>()
+                              .Include(pc => pc.Category)
+                              .Include(pr => pr.ProductRatings)
+                              .Take(sorting)
+                              .Where(p => p.DistcountedPrice > minPrice && p.DistcountedPrice < maxPrice)
+                              .ToList();
+        }
     }
 
 }

@@ -7,7 +7,6 @@
         private readonly ICategoryService _categoryService = categoryService;
         private readonly IProductService _productService = productService;
 
-
         public IActionResult Index(int id)
         {
 
@@ -24,6 +23,11 @@
             };
 
             return View(productResultDto);
+        }
+        public IActionResult GetByCategory(int id)
+        {
+            var prodcutDtos = _productService.GetProductsByCategoriId(id);
+            return View(prodcutDtos);
         }
 
     }

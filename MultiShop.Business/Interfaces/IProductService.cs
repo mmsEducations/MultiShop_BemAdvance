@@ -1,4 +1,6 @@
-﻿namespace MultiShop.Business
+﻿using MultiShop.Business.Dto;
+
+namespace MultiShop.Business
 {
     public interface IProductService
     {
@@ -6,6 +8,10 @@
         ProductDto GetProductById(int id);
 
         List<ProductDto> GetSimilarProducts(int id);
+
+        List<ProductDto> GetProductsByCategoriId(int id);
+
+        List<ProductDto> GetProductsByFilter(FilterDto filter);
 
     }
 }

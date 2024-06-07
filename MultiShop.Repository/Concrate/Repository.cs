@@ -26,8 +26,12 @@ namespace MultiShop.Repository
 
         public List<TEntity> GetAll()
         {
-            return _dbset.ToList();
+            return _dbset.AsNoTracking().ToList();
         }
+        //public List<TEntity> GetAllAsNotracking()
+        //{
+        //    return _dbset.AsNoTracking().ToList();
+        //}
 
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
         {
@@ -81,3 +85,8 @@ namespace MultiShop.Repository
 
     }
 }
+
+//AsNoTracking: metodu ilgili entity üzerinde sadece veri okurken kullanılması gereken bir metottur ?
+/*
+ Neden kullanır? ?performans için kullanılır 
+ */

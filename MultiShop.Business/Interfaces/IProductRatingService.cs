@@ -3,6 +3,7 @@
     public interface IProductRatingService
     {
         List<ProductDto> GetProductWithRatings(ProductHeaderType productHeaderType);
+
     }
 
 }

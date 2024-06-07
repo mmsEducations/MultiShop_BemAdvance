@@ -9,4 +9,5 @@
         public int SliderPosition { get; set; }
         public int? Order { get; set; }
     }
+
 }

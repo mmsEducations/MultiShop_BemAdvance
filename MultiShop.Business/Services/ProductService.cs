@@ -1,14 +1,12 @@
-﻿namespace MultiShop.Business
+﻿using MultiShop.Business.Dto;
+
+namespace MultiShop.Business
 {
     public class ProductService(IProductRepository productRepository,
-                                IProductRatingRepository productRatingRepository,
-                                IProductImageRepository productImageRepository,
                                 IMapper mapper
                                 ) : IProductService
     {
         private readonly IProductRepository _productRepository = productRepository;
-        private readonly IProductRatingRepository _productRatingRepository = productRatingRepository;
-        private readonly IProductImageRepository _productImageRepository = productImageRepository;
         private readonly IMapper _mapper = mapper;
 
         public ProductDto GetProductById(int id)
@@ -37,9 +35,23 @@
             List<ProductDto> productsDtos = _mapper.Map<List<ProductDto>>(products);
             return productsDtos;
         }
+
+        public List<ProductDto> GetProductsByCategoriId(int id)
+        {
+            List<Product> products = _productRepository.GetProductsByCategoriId(id);
+            List<ProductDto> productDtos = _mapper.Map<List<ProductDto>>(products);
+            return productDtos;
+        }
+
+        public List<ProductDto> GetProductsByFilter(FilterDto filter)
+        {
+            List<Product> products = _productRepository.GetProductsByFilter(filter.MinPrice, filter.MaxPrice, filter.ShowingPageCount);
+            List<ProductDto> productDtos = _mapper.Map<List<ProductDto>>(products);
+            return productDtos;
+        }
+
     }
 }
-
 
 //Classlar arasında bağımlılığı azltmak için kullanılması gereken yapı Abstractiondır
 //Interface kullanarak bağımlılık azaltılır ve soyutlanmış olur 
