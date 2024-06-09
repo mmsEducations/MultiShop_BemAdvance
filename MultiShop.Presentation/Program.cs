@@ -1,7 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using MultiShop.Business.Interfaces;
+using MultiShop.Business.Sieve;
 using MultiShop.Data;
+using MultiShop.Presentation;
 using MultiShop.Repository;
+using Sieve.Models;
+using Sieve.Services;
 
 var builder = WebApplication.CreateBuilder(args);//web uygulamasý oluþturulur 
 
@@ -16,6 +20,8 @@ builder.Services.AddScoped<ICategoryRepository, ProductsRepository>();
 
 builder.Services.AddScoped<ISliderService, SliderService>();
 builder.Services.AddScoped<ISliderRepository, SliderRepository>();
+
+
 
 #region product
 builder.Services.AddScoped<IProductService, ProductService>();
@@ -61,6 +67,21 @@ builder.Services.AddAutoMapper(typeof(SliderMappingProfile));
 builder.Services.AddAutoMapper(typeof(CustomerMappingProfile));
 builder.Services.AddAutoMapper(typeof(OrderMappingProfile));
 builder.Services.AddAutoMapper(typeof(OrderDetailMappingProfile));
+
+
+//Sieve Entegration
+builder.Services.Configure<SieveOptions>(builder.Configuration.GetSection("Sieve"));
+
+
+builder.Services.AddScoped<ISieveCustomSortMethods, SieveCustomSortMethods>();
+builder.Services.AddScoped<ISieveCustomFilterMethods, SieveCustomFilterMethods>();
+builder.Services.AddScoped<ISieveConfiguration, SieveConfigurationForProduct>(); // Register SieveConfigurationForProduct
+
+//builder.Services.AddScoped<ISieveProcessor, SieveProcessor>();
+builder.Services.AddScoped<ISieveProcessor, ApplicationSieveProcessor>();
+
+//Sieve Entegration
+
 
 builder.Services.AddSession();//Session kullanmak için eklenmelidir
 

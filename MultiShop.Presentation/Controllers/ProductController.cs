@@ -1,8 +1,11 @@
-﻿namespace MultiShop.Presentation.Controllers
+﻿using Sieve.Models;
+
+namespace MultiShop.Presentation.Controllers
 {
     //Primary Constructor 
     public class ProductController(ICategoryService categoryService,
-                                   IProductService productService) : Controller
+                                   IProductService productService
+                                   ) : Controller
     {
         private readonly ICategoryService _categoryService = categoryService;
         private readonly IProductService _productService = productService;
@@ -30,6 +33,18 @@
             return View(prodcutDtos);
         }
 
+
+        [HttpGet]
+        public IActionResult Search(string productName, SieveModel sieveModel)
+        {
+
+            sieveModel.Filters = $"ProductName|CategoryName@=*{productName}";
+            var result = _productService.GetProductsWithSieve(sieveModel);
+
+            return View(result);
+        }
     }
 }
 
+//https://github.com/Biarity/Sieve
+//https://github.com/Biarity/Sieve/blob/master/Sieve.Sample/Startup.cs

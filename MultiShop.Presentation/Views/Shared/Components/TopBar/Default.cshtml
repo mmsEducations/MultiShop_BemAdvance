@@ -57,12 +57,14 @@
             </a>
         </div>
         <div class="col-lg-4 col-6 text-left">
-            <form action="">
+            <form action="/Product/Search">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for products">
+                    <input type="text" class="form-control" placeholder="Search for products" name="productName">
                     <div class="input-group-append">
                         <span class="input-group-text bg-transparent text-primary">
-                            <i class="fa fa-search"></i>
+                            <i class="fa fa-search">
+                                <input type="submit" name="name" value="" />
+                            </i>
                         </span>
                     </div>
                 </div>

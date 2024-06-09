@@ -8,6 +8,13 @@ namespace MultiShop.Repository
 
         }
 
+        public List<Product> GetAllProductsWithCategory()
+        {
+            return _dbContext.Set<Product>()
+                              .Include(pc => pc.Category)
+                              .ToList();
+        }
+
         public Product GetProductById(int id)
         {
             return _dbContext.Set<Product>()
