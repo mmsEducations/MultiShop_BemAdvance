@@ -36,6 +36,13 @@ namespace MultiShop.Repository
                               .Where(p => p.DistcountedPrice > minPrice && p.DistcountedPrice < maxPrice)
                               .ToList();
         }
+
+        public List<Product> GetProductsWithCategory()
+        {
+            return _dbContext.Set<Product>()
+                              .Include(pc => pc.Category)
+                              .ToList();
+        }
     }
 
 }

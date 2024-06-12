@@ -8,6 +8,8 @@ namespace MultiShop.Repository
         Product GetProductById(int id);
         List<Product> GetProductsByCategoriId(int id);
         public List<Product> GetProductsByFilter(int minPrice, int maxPrice, int sorting);
+
+        List<Product> GetProductsWithCategory();
     }
 
 

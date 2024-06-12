@@ -1,4 +1,6 @@
-﻿namespace MultiShop.Presentation.Controllers
+﻿using Sieve.Models;
+
+namespace MultiShop.Presentation.Controllers
 {
     //Primary Constructor 
     public class ProductController(ICategoryService categoryService,
@@ -28,6 +30,16 @@
         {
             var prodcutDtos = _productService.GetProductsByCategoriId(id);
             return View(prodcutDtos);
+        }
+
+        public IActionResult Search(string searchData, SieveModel sieveModel)
+        {
+            sieveModel.Filters = $"ProductName|CategoryName@=*{searchData}";
+            var result = _productService.GetProductsWithSieve(sieveModel);
+            ViewBag.SearchData = searchData;
+
+
+            return View(result);
         }
 
     }

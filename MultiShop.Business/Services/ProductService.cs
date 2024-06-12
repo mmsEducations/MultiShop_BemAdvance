@@ -1,13 +1,17 @@
 ﻿using MultiShop.Business.Dto;
+using Sieve.Models;
+using Sieve.Services;
 
 namespace MultiShop.Business
 {
     public class ProductService(IProductRepository productRepository,
-                                IMapper mapper
+                                IMapper mapper,
+                                ISieveProcessor sieveProcessor
                                 ) : IProductService
     {
         private readonly IProductRepository _productRepository = productRepository;
         private readonly IMapper _mapper = mapper;
+        private readonly ISieveProcessor _sieveProcessor = sieveProcessor;
 
         public ProductDto GetProductById(int id)
         {
@@ -48,6 +52,18 @@ namespace MultiShop.Business
             List<Product> products = _productRepository.GetProductsByFilter(filter.MinPrice, filter.MaxPrice, filter.ShowingPageCount);
             List<ProductDto> productDtos = _mapper.Map<List<ProductDto>>(products);
             return productDtos;
+        }
+
+        public List<ProductDto> GetProductsWithSieve(SieveModel sieveModel)
+        {
+            var products = _productRepository.GetProductsWithCategory().AsQueryable();
+
+            var siveProducts = _sieveProcessor.Apply(sieveModel, products); // Returns `result` after applying the sort/filter/page query in `SieveModel` to it
+
+            List<ProductDto> productDtos = _mapper.Map<List<ProductDto>>(siveProducts);
+
+            return productDtos;
+
         }
 
     }

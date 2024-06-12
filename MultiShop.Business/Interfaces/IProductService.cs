@@ -1,4 +1,5 @@
 ﻿using MultiShop.Business.Dto;
+using Sieve.Models;
 
 namespace MultiShop.Business
 {
@@ -12,6 +13,8 @@ namespace MultiShop.Business
         List<ProductDto> GetProductsByCategoriId(int id);
 
         List<ProductDto> GetProductsByFilter(FilterDto filter);
+
+        List<ProductDto> GetProductsWithSieve(SieveModel sieveModel);
 
     }
 }
