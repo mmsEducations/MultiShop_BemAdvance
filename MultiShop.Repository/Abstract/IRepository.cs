@@ -1,4 +1,5 @@
-﻿
+﻿using Microsoft.EntityFrameworkCore.Storage;
+
 namespace MultiShop.Repository
 {
     //Tüm enitityler için ortak olan metodların imzalarını barındırır 
@@ -16,5 +17,9 @@ namespace MultiShop.Repository
         bool Update(TEntity entity);
 
         bool Save();
+
+        public IDbContextTransaction BeginTransaction();
+        public bool CommitTransaction();
+        public bool RollbackTransaction();
     }
 }

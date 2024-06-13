@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.EntityFrameworkCore.Storage;
+
 namespace MultiShop.Repository
 {
     //Repository<TEntity> Generic bir class
@@ -60,7 +62,6 @@ namespace MultiShop.Repository
                 return Save();
             }
             return false;
-
         }
 
         public bool RemoveRange(IEnumerable<TEntity> entities)
@@ -80,7 +81,49 @@ namespace MultiShop.Repository
 
         public bool Save()
         {
-            return _dbContext.SaveChanges() > 0;
+            try
+            {
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
+        }
+
+
+
+        public IDbContextTransaction BeginTransaction()
+        {
+            return _dbContext.Database.BeginTransaction();
+
+        }
+
+        public bool CommitTransaction()
+        {
+            try
+            {
+                _dbContext.Database.CommitTransaction();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool RollbackTransaction()
+        {
+            try
+            {
+                _dbContext.Database.RollbackTransaction();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }
