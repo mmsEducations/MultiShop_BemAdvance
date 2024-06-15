@@ -1,6 +1,7 @@
 ﻿using MultiShop.Business.Interfaces;
 using MultiShop.Business.Interfaces.Test;
 using MultiShop.Business.Services;
+using MultiShop.Data;
 using MultiShop.Repository;
 
 namespace MultiShop.Presentation.Extensions
@@ -40,6 +41,8 @@ namespace MultiShop.Presentation.Extensions
 
             //Test Service
             services.AddScoped<ITestService, TestService>();
+            services.AddScoped<IRepository<Product>, ProductRepository>();
+
         }
     }
 }

@@ -11,6 +11,7 @@ namespace MultiShop.Business.Services
             _productRepository = productRepository;
         }
 
+
         public void ExampleTransaction()
         {
             using (var transaction = _productRepository.BeginTransaction())

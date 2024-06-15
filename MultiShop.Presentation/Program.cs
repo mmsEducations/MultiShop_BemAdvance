@@ -26,6 +26,16 @@ builder.Services.AddCustomAutoMapper();
 builder.Services.AddCustomSieveConfiguration(builder.Configuration); // Assuming 'builder' is an instance of IConfiguration
 
 
+// Add logging configuration
+builder.Services.AddLogging(logging =>
+{
+    logging.ClearProviders(); // Clear the default providers (optional)
+    logging.AddConsole(); // Add console logging
+    logging.AddDebug(); // Add debug logging (optional)
+    // Add other logging providers as needed (e.g., logging to a file, logging to Azure Application Insights, etc.)
+});
+
+
 builder.Services.AddSession();//Session kullanmak için eklenmelidir
 
 var app = builder.Build();
