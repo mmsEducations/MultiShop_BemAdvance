@@ -12,6 +12,10 @@
 
         public IActionResult Index()
         {
+
+            //throw new InvalidOperationException("This is a test exception.");
+
+
             //HttpContext.Session.SetString("userName", "Bektaş");
 
             //var cart = new Cart { Id = 1, Name = "Cart1" };

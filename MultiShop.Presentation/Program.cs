@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MultiShop.Data;
 using MultiShop.Presentation.Extensions;
+using MultiShop.Presentation.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);//web uygulamasý oluþturulur 
 
@@ -39,6 +40,8 @@ builder.Services.AddLogging(logging =>
 builder.Services.AddSession();//Session kullanmak için eklenmelidir
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseRouting(); //2
 
