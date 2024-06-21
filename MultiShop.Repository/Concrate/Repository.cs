@@ -1,13 +1,10 @@
-﻿
-using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.EntityFrameworkCore.Storage;
 
 namespace MultiShop.Repository
 {
-    //Repository<TEntity> Generic bir class
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         protected readonly MultiShopDbContext _dbContext;
-
         private DbSet<TEntity> _dbset;
 
         public Repository(MultiShopDbContext dbContext)
@@ -18,7 +15,7 @@ namespace MultiShop.Repository
 
         public TEntity? Get(int id)
         {
-            return _dbset.Find(id);//_dbContext.Set<Category>()
+            return _dbset.Find(id);
         }
 
         public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
@@ -30,10 +27,6 @@ namespace MultiShop.Repository
         {
             return _dbset.AsNoTracking().ToList();
         }
-        //public List<TEntity> GetAllAsNotracking()
-        //{
-        //    return _dbset.AsNoTracking().ToList();
-        //}
 
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
         {
@@ -46,12 +39,11 @@ namespace MultiShop.Repository
             return Save();
         }
 
-        public bool AddRange(List<TEntity> entities)//Bir demet veri
+        public bool AddRange(List<TEntity> entities)
         {
             _dbset.AddRange(entities);
             return Save();
         }
-
 
         public bool Remove(int id)
         {
@@ -66,18 +58,15 @@ namespace MultiShop.Repository
 
         public bool RemoveRange(IEnumerable<TEntity> entities)
         {
-
             _dbset.RemoveRange(entities);
             return Save();
         }
-
 
         public bool Update(TEntity entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
             return Save();
         }
-
 
         public bool Save()
         {
@@ -92,12 +81,9 @@ namespace MultiShop.Repository
             }
         }
 
-
-
         public IDbContextTransaction BeginTransaction()
         {
             return _dbContext.Database.BeginTransaction();
-
         }
 
         public bool CommitTransaction()
@@ -126,15 +112,72 @@ namespace MultiShop.Repository
             }
         }
 
-        //---
-        public Task<List<TEntity>> GetAllAsync()
+        public async Task<List<TEntity>> GetAllAsync()
         {
-            return _dbset.AsNoTracking().ToListAsync();
+            return await _dbset.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await _dbset.Where(predicate).AsNoTracking().ToListAsync();
+        }
+
+        public async Task<TEntity?> GetAsync(int id)
+        {
+            return await _dbset.FindAsync(id);
+        }
+
+        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await _dbset.Where(predicate).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> AddAsync(TEntity entity)
+        {
+            await _dbset.AddAsync(entity);
+            return await SaveAsync();
+        }
+
+        public async Task<bool> AddRangeAsync(List<TEntity> entities)
+        {
+            await _dbset.AddRangeAsync(entities);
+            return await SaveAsync();
+        }
+
+        public async Task<bool> RemoveAsync(int id)
+        {
+            TEntity? entity = await GetAsync(id);
+            if (entity != null)
+            {
+                _dbset.Remove(entity);
+                return await SaveAsync();
+            }
+            return false;
+        }
+
+        public async Task<bool> RemoveRangeAsync(IEnumerable<TEntity> entities)
+        {
+            _dbset.RemoveRange(entities);
+            return await SaveAsync();
+        }
+
+        public async Task<bool> UpdateAsync(TEntity entity)
+        {
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            return await SaveAsync();
+        }
+
+        public async Task<bool> SaveAsync()
+        {
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
         }
     }
 }
-
-//AsNoTracking: metodu ilgili entity üzerinde sadece veri okurken kullanılması gereken bir metottur ?
-/*
- Neden kullanır? ?performans için kullanılır 
- */

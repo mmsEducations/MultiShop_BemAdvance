@@ -22,8 +22,17 @@ namespace MultiShop.Repository
         public bool CommitTransaction();
         public bool RollbackTransaction();
 
-        //
 
-        Task<List<TEntity>> GetAllAsync();//List<Product>,List<Slider>
+        // Asenkron metotlar
+        Task<List<TEntity>> GetAllAsync();
+        Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity?> GetAsync(int id);
+        Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<bool> AddAsync(TEntity entity);
+        Task<bool> AddRangeAsync(List<TEntity> entities);
+        Task<bool> RemoveAsync(int id);
+        Task<bool> RemoveRangeAsync(IEnumerable<TEntity> entities);
+        Task<bool> UpdateAsync(TEntity entity);
+        Task<bool> SaveAsync();
     }
 }
