@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MultiShop.Data.Configurations;
 
 namespace MultiShop.Data
 {
@@ -25,6 +26,10 @@ namespace MultiShop.Data
         {
             modelBuilder.Entity<OrderDetail>()
                 .HasKey(od => new { od.OrderID, od.ProductID });
+
+            //For configuration added.
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+
         }
     }
 
