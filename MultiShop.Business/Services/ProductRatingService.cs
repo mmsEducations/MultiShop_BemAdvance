@@ -5,7 +5,7 @@ namespace MultiShop.Business
 {
     public class ProductRatingService(IProductRatingRepository productRatingRepository,
                                       IProductRepository productRepository,
-                                     IMapper mapper)
+                                      IMapper mapper)
 
         : IProductRatingService
     {

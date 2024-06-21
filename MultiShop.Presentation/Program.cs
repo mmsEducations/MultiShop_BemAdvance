@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using MultiShop.Data;
 using MultiShop.Presentation.Extensions;
 using MultiShop.Presentation.Middleware;
+using System.Reflection;
+
 
 var builder = WebApplication.CreateBuilder(args);//web uygulamasý oluþturulur 
 
@@ -38,6 +40,14 @@ builder.Services.AddLogging(logging =>
 
 
 builder.Services.AddSession();//Session kullanmak için eklenmelidir
+
+//1.Yol Extension method olarak eklemek
+builder.Services.AddMediatRHandlers(Assembly.GetExecutingAssembly());
+
+//2.Yol 
+//builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+//builder.Services.AddTransient<IRequestHandler<GetProductByCategoryIdQuery, List<ProductDto>>, GetProductsByCategoryIdHandler>();
+
 
 var app = builder.Build();
 

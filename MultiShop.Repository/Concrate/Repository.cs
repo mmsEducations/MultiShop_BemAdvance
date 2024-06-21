@@ -126,6 +126,11 @@ namespace MultiShop.Repository
             }
         }
 
+        //---
+        public Task<List<TEntity>> GetAllAsync()
+        {
+            return _dbset.AsNoTracking().ToListAsync();
+        }
     }
 }
 

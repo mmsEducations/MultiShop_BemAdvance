@@ -1,12 +1,16 @@
-﻿namespace MultiShop.Presentation.Views
-{
-    public class SliderBottomViewComponent(ISliderService sliderService) : ViewComponent
-    {
-        private readonly ISliderService _sliderService = sliderService;
+﻿using MediatR;
+using MultiShop.Business.MediatR.Queries;
 
-        public IViewComponentResult Invoke()
+namespace MultiShop.Presentation.Views
+{
+    public class SliderBottomViewComponent(IMediator mediator) : ViewComponent
+    {
+        private readonly IMediator _mediator = mediator;
+
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            List<SliderDto> sliders = _sliderService.GetSliders(SliderPosition.Bottom);
+            var query = new GetSlidersQuery { SliderPosition = SliderPosition.Bottom };
+            var sliders = await _mediator.Send(query);
 
             return View(sliders);
         }

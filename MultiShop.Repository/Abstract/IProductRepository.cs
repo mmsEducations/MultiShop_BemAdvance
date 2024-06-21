@@ -6,10 +6,16 @@ namespace MultiShop.Repository
     public interface IProductRepository : IRepository<Product>
     {
         Product GetProductById(int id);
+
         List<Product> GetProductsByCategoriId(int id);
         public List<Product> GetProductsByFilter(int minPrice, int maxPrice, int sorting);
 
         List<Product> GetProductsWithCategory();
+
+
+        Task<List<Product>> GetProductsByCategoriIdAsync(int id);
+
+        Task<Product> GetProductByIdSync(int id);
     }
 
 

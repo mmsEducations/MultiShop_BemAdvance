@@ -21,5 +21,9 @@ namespace MultiShop.Repository
         public IDbContextTransaction BeginTransaction();
         public bool CommitTransaction();
         public bool RollbackTransaction();
+
+        //
+
+        Task<List<TEntity>> GetAllAsync();//List<Product>,List<Slider>
     }
 }

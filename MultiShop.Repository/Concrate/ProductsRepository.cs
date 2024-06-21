@@ -1,4 +1,5 @@
 ﻿
+
 namespace MultiShop.Repository
 {
     public class ProductRepository : MultiShop.Repository.Repository<Product>, IProductRepository
@@ -42,6 +43,25 @@ namespace MultiShop.Repository
             return _dbContext.Set<Product>()
                               .Include(pc => pc.Category)
                               .ToList();
+        }
+
+
+        public Task<List<Product>> GetProductsByCategoriIdAsync(int id)
+        {
+            return _dbContext.Set<Product>()
+                            .Include(pc => pc.Category)
+                            .Where(p => p.CategoryID == id)
+                            .ToListAsync();
+        }
+
+        public Task<Product> GetProductByIdSync(int id)
+        {
+            return _dbContext.Set<Product>()
+                             .Include(pc => pc.Category)
+                             .Include(pr => pr.ProductRatings)
+                             .Include(pr => pr.ProductImages)
+                             .Where(p => p.ProductID == id)
+                             .FirstOrDefaultAsync();
         }
     }
 

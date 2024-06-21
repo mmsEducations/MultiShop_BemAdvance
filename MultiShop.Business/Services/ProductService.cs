@@ -33,6 +33,7 @@ namespace MultiShop.Business
         public List<ProductDto> GetSimilarProducts(int id)
         {
             var catId = _productRepository.GetProductById(id).Category.CategoryId;
+
             List<Product> products = _productRepository.GetAll(p => p.CategoryID == catId)
                                                        .Take(10)
                                                        .ToList();
