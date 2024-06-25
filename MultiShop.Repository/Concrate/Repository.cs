@@ -1,4 +1,5 @@
 ﻿
+
 namespace MultiShop.Repository
 {
     //Repository<TEntity> Generic bir class
@@ -83,6 +84,10 @@ namespace MultiShop.Repository
             return _dbContext.SaveChanges() > 0;
         }
 
+        public Task<List<TEntity>> GetAllAsync()
+        {
+            return _dbset.AsNoTracking().ToListAsync();
+        }
     }
 }
 

@@ -16,5 +16,8 @@ namespace MultiShop.Repository
         bool Update(TEntity entity);
 
         bool Save();
+
+
+        Task<List<TEntity>> GetAllAsync();//List<Product>,List<Slider>
     }
 }

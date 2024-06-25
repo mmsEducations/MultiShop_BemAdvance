@@ -1,52 +1,18 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
-using MultiShop.Business.Interfaces;
-using MultiShop.Business.Sieve;
+using MultiShop.Business.MediatR.Handlers;
+using MultiShop.Business.MediatR.Queries;
 using MultiShop.Data;
-using MultiShop.Repository;
-using Sieve.Models;
-using Sieve.Services;
+using MultiShop.Presentation.Extensions;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);//web uygulamasý oluþturulur 
 
 builder.Services.AddControllersWithViews(); //1) Controller views alt yapýsýný entegre ediyoruz
 
 
-//Servis Entegrasyonu
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-
-//Repository ntegrasyonu 
-builder.Services.AddScoped<ICategoryRepository, ProductsRepository>();
-
-builder.Services.AddScoped<ISliderService, SliderService>();
-builder.Services.AddScoped<ISliderRepository, SliderRepository>();
-
-#region product
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-#endregion
-
-#region productRating
-builder.Services.AddScoped<IProductRatingService, ProductRatingService>();
-builder.Services.AddScoped<IProductRatingRepository, ProductRatingRepository>();
-#endregion
-
-#region productImage
-builder.Services.AddScoped<IProductImageService, ProductImageService>();
-builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
-#endregion
-
-
-#region customer
-builder.Services.AddScoped<ICustomerService, CustomerService>();
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-#endregion
-
-#region order-orderdetail
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
-#endregion
-
+//Servis Entegrations 
+builder.Services.AddCustomServices();
 
 //4:for connection db 
 //bunun set edildiði yer MultiShopDbContext içerisindeki constructor metottur.
@@ -55,25 +21,17 @@ builder.Services.AddDbContext<MultiShopDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MultiShopConnectionStr_Prod"));
 });
 
-
 //Step2 : AutoMapper
-
-builder.Services.AddAutoMapper(typeof(ProductMappingProfile));
-builder.Services.AddAutoMapper(typeof(CategoryMappingProfile));
-builder.Services.AddAutoMapper(typeof(SliderMappingProfile));
-builder.Services.AddAutoMapper(typeof(CustomerMappingProfile));
-builder.Services.AddAutoMapper(typeof(OrderMappingProfile));
-builder.Services.AddAutoMapper(typeof(OrderDetailMappingProfile));
-
+builder.Services.AddCustomAutoMapper();
 
 //Sieve Configuration 
+builder.Services.AddCustomSieveServices(builder.Configuration);
 
-builder.Services.Configure<SieveOptions>(builder.Configuration.GetSection("Sieve"));
+//Add mediatR
+builder.Services.AddMediatR(m => m.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+builder.Services.AddScoped<IRequestHandler<GetCategoriesQuery, List<CategoryDto>>, GetCategoriesQueryHandler>();
 
-builder.Services.AddScoped<ISieveCustomSortMethods, SieveCustomSortMethods>();
-builder.Services.AddScoped<ISieveCustomFilterMethods, SieveCustomFilterMethods>();
 
-builder.Services.AddScoped<ISieveProcessor, ApplicationSieveProcessor>();
 
 builder.Services.AddSession();//Session kullanmak için eklenmelidir
 

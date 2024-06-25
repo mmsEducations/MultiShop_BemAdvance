@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MultiShop.Data.Configurations;
 
 namespace MultiShop.Data
 {
@@ -16,7 +17,6 @@ namespace MultiShop.Data
         public DbSet<Slider> Sliders { get; set; } //Database objesine karşılık gelir 
         public DbSet<ProductRating> ProductRatings { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
-
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
@@ -25,7 +25,13 @@ namespace MultiShop.Data
         {
             modelBuilder.Entity<OrderDetail>()
                 .HasKey(od => new { od.OrderID, od.ProductID });
+
+            //Entity Configuration added...
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+
         }
+
+
     }
 
 

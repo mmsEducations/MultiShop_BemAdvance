@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MediatR" Version="12.3.0" />
 	<PackageReference Include="Sieve" Version="2.5.5" />
 
   </ItemGroup>
@@ -15,6 +16,10 @@
   <ItemGroup>
     <ProjectReference Include="..\MultiShop.Data\MultiShop.Data.csproj" />
     <ProjectReference Include="..\MultiShop.Repository\MultiShop.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MediatR\Commands\" />
   </ItemGroup>
 
 </Project>

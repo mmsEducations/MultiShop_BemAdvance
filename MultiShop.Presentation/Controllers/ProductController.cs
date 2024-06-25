@@ -4,10 +4,14 @@ namespace MultiShop.Presentation.Controllers
 {
     //Primary Constructor 
     public class ProductController(ICategoryService categoryService,
-                                   IProductService productService) : Controller
+                                   IProductService productService
+
+
+                                   ) : Controller
     {
         private readonly ICategoryService _categoryService = categoryService;
         private readonly IProductService _productService = productService;
+
 
         public IActionResult Index(int id)
         {
@@ -26,12 +30,15 @@ namespace MultiShop.Presentation.Controllers
 
             return View(productResultDto);
         }
+
+        [HttpGet]
         public IActionResult GetByCategory(int id)
         {
             var prodcutDtos = _productService.GetProductsByCategoriId(id);
             return View(prodcutDtos);
         }
 
+        [HttpGet]
         public IActionResult Search(string searchData, SieveModel sieveModel)
         {
             sieveModel.Filters = $"ProductName|CategoryName@=*{searchData}";

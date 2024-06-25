@@ -1,5 +1,6 @@
 ﻿namespace MultiShop.Data
 {
+
     public class Category : BaseEntity, IOrdered, IImage
     {
         public int CategoryId { get; set; }
